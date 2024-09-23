@@ -1,92 +1,115 @@
-Figma File:-
-    https://www.figma.com/design/gWKLU0p2noVl76lCSL7ISV/Renaissance---Luxury-Restaurant-(Community)?node-id=1402-3553&node-type=canvas&t=pFAAQTDxUrql9ASh-0
+# Renaissance - Luxury Restaurant
 
+### Figma File:
+[Figma Design Link](https://www.figma.com/design/gWKLU0p2noVl76lCSL7ISV/Renaissance---Luxury-Restaurant-(Community)?node-id=1402-3553&node-type=canvas&t=pFAAQTDxUrql9ASh-0)
 
-This project is created with the (CRA way)
-    command: "npx create-react-app experts-cloud-task1"
+---
 
-Run With:
-    command: "npm start"
+### Project Setup
 
+This project was created using Create React App (CRA).
 
-----------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------
--------------------------------------Tried to make responsive it need some changes------------------------------------------
+**Command to create the project:**
+```bash
+npx create-react-app experts-cloud-task1
+```
 
+**Run the project:**
+```bash
+npm start
+```
 
-Did styling with TAILWIND
-    Setup:-
-        commands:   "npm install -D tailwindcss postcss autoprefixer"
-                    "npx tailwindcss init -p"
+---
 
-Copy this in the "tailwind.config.js" file:-
-    /** @type {import('tailwindcss').Config} */
-    module.exports = {
-    content: [
-        "./src/**/*.{js,jsx,ts,tsx}",
-    ],
-    theme: {
-        extend: {},
-    },
-    plugins: [],
-    }
+### Responsiveness
 
-Copy this in the "src/index.css" file:-
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
+*Tried to make the project responsive, but it still needs some changes.*
 
+---
 
-----------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------
+### Styling with Tailwind CSS
 
+**Tailwind Setup:**
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
 
-Routing Setup:-
-    command: "npm install react-router-dom"
+Copy the following configuration in the `tailwind.config.js` file:
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
 
-    Importing "BrowserRouter" in the component where the Routing is initialized in my case it is "src/App.js" :
-        import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+Copy the following into the `src/index.css` file:
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
 
+---
 
-----------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------
+### Routing Setup
 
+**Install React Router:**
+```bash
+npm install react-router-dom
+```
 
-Used Multiple "font family" 
-    imported those family link in the "index.css" file.
-    and describe them in "tailwind.config.js" file in "extend/fontFamily"
-    
+Import `BrowserRouter` in the component where the routing is initialized, for example in `src/App.js`:
+```js
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+```
 
-----------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------
+---
 
+### Fonts
 
-Used Microsoft SQL Server for database
-    connection in "server/.env" file
+Multiple font families were used. The fonts were imported into the `index.css` file and defined in the `extend/fontFamily` section of `tailwind.config.js`.
 
+---
 
-Sql Queries:-
-create database luxuryRestaurant;
-use luxuryRestaurant;
+### Database Setup
 
-create table menu(
-    itemNumber int IDENTITY(1,1),
-    itemName varchar(35) primary key,
-    itemDescription varchar(100),
-    itemPrice float,
+The project uses Microsoft SQL Server for the database connection, which is configured in the `server/index.js` file.
+
+**SQL Queries:**
+
+Create the `luxuryRestaurant` database and necessary tables:
+```sql
+CREATE DATABASE luxuryRestaurant;
+USE luxuryRestaurant;
+
+CREATE TABLE menu (
+  itemNumber INT IDENTITY(1,1),
+  itemName VARCHAR(35) PRIMARY KEY,
+  itemDescription VARCHAR(100),
+  itemPrice FLOAT
 );
 
 CREATE TABLE reserveTable (
-    reservationID INT PRIMARY KEY IDENTITY(1,1),
-    username VARCHAR(50),
-    contactNumber VARCHAR(15),
-    tableNumber INT,
-    seats INT,
-    reservanceDate DATE,
-    itemName VARCHAR(35),
-    FOREIGN KEY (itemName) REFERENCES menu(itemName)
+  reservationID INT PRIMARY KEY IDENTITY(1,1),
+  username VARCHAR(50),
+  contactNumber VARCHAR(15),
+  tableNumber INT,
+  seats INT,
+  reservanceDate DATE,
+  itemName VARCHAR(35),
+  FOREIGN KEY (itemName) REFERENCES menu(itemName)
 );
+```
 
+**Insert sample data into `menu` table:**
+```sql
 INSERT INTO menu (itemName, itemDescription, itemPrice) VALUES
 ('Salmon Nigiri', 'Salmon, sushi rice, sushi vinegar', 32.00),
 ('Hamachi', 'Hamachi, sushi rice, nori', 34.29),
@@ -98,23 +121,31 @@ INSERT INTO menu (itemName, itemDescription, itemPrice) VALUES
 ('Dragon Roll', 'Nori, sushi rice, avocado, unagi, unagi sauce', 9.00),
 ('Philadelphia Roll', 'Nori, sushi rice, smoked salmon, cream cheese', 10.99),
 ('Spider Roll', 'Nori, sushi rice, soft-shell crab, avocado, spicy mayo', 11.49);
-
-select * from menu order by itemNumber asc;
-
-select * from reserveTable;
+```
 
 
-----------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------
 
+---
 
-For Microsoft SQL Server Connection with React:-
-command in server for db connection:
-    "npm init -y"
-    "npm install express mssql cors body-parser"
-    "npm install --save-dev nodemon" (for automatically refresh)
+### Backend Setup
 
+For connecting Microsoft SQL Server with React:
 
-----------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------
+1. **Initialize Node.js project:**
+   ```bash
+   npm init -y
+   ```
 
+2. **Install necessary packages:**
+   ```bash
+   npm install express mssql cors body-parser
+   ```
+
+3. **Install `nodemon` for automatic server refresh:**
+   ```bash
+   npm install --save-dev nodemon
+   ```
+
+---
+
+```
